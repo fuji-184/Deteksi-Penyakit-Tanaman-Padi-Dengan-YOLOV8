@@ -10,4 +10,6 @@ Dataset yang terkait dengan proyek web deteksi penyakit pada tanaman padi dapat 
 
 [Live Preview](https://alpa.space)
 
+[Image for testing](https://drive.google.com/file/d/1SA3TM47Pb_sOtjOE_RrkBNoBaEnXqEU3/view?usp=drivesdk)
+
 Still in development
