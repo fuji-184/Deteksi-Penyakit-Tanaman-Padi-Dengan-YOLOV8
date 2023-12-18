@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- Untuk Chrome & Opera -->
+<meta name="theme-color" content="#000000"/>
+<!-- Untuk Safari iOS -->
+<meta name="apple-mobile-web-app-status-bar-style" content="#000000"/>
+<!-- Untuk Windows Phone -->
+<meta name="msapplication-navbutton-color" content="#000000"/>
+    <title>YOLOv8 Object Detection</title>
+    <style>
+    body {
+            background-color: black;
+            color: white;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+    }
+      canvas {
+          display:block;
+          border: 1px solid black;
+          margin-top:10px;
+      }
+      
+      input {
+              position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+      }
+    </style>
+</head>
+<body>
+    <input id="uploadInput" type="file"/>
+    <canvas></canvas>
+    <script>
+      /**
+       * "Upload" button onClick handler: uploads selected image file
+       * to backend, receives array of detected objects
+       * and draws them on top of image
+       */
+       const input = document.getElementById("uploadInput");
+       input.addEventListener("change",async(event) => {
+           const data = new FormData();
+           data.append("image_file",event.target.files[0],"image_file");
+           const response = await fetch("/detect",{
+               method:"post",
+               body:data
+           });
+           const boxes = await response.json();
+           draw_image_and_boxes(event.target.files[0],boxes);
+       })
+
+      /**
+       * Function draws the image from provided file
+       * and bounding boxes of detected objects on
+       * top of the image
+       * @param file Uploaded file object
+       * @param boxes Array of bounding boxes in format [[x1,y1,x2,y2,object_type,probability],...]
+       */
+      function draw_image_and_boxes(file,boxes) {
+          const img = new Image()
+          img.src = URL.createObjectURL(file);
+          img.onload = () => {
+              const canvas = document.querySelector("canvas");
+              canvas.width = img.width;
+              canvas.height = img.height;
+              const ctx = canvas.getContext("2d");
+              ctx.drawImage(img,0,0);
+              ctx.strokeStyle = "#00FF00";
+              ctx.lineWidth = 3;
+              ctx.font = "18px serif";
+              boxes.forEach(([x1,y1,x2,y2,label]) => {
+                  ctx.strokeRect(x1,y1,x2-x1,y2-y1);
+                  ctx.fillStyle = "#00ff00";
+                  const width = ctx.measureText(label).width;
+                  ctx.fillRect(x1,y1,width+10,25);
+                  ctx.fillStyle = "#000000";
+                  ctx.fillText(label, x1, y1+18);
+              });
+          }
+      }
+    </script>
+</body>
+</html>
