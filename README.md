@@ -7,3 +7,7 @@ Proyek ini mengembangkan sistem deteksi penyakit pada tanaman padi berbasis web 
 Metode yang digunakan dalam proyek ini adalah metode kuantitatif, yang didasarkan pada analisis angka dan data numerik untuk mengukur dan menggambarkan fenomena deteksi penyakit pada tanaman padi. Dalam konteks ini, model YOLOv8 diterapkan untuk melatih dan menghasilkan prediksi berupa koordinat spasial objek penyakit dalam gambar. Proses pelatihan model melibatkan manipulasi matematis terhadap dataset yang mencakup berbagai gambar penyakit pada tanaman padi. Hasil deteksi yang dihasilkan oleh model bersifat kuantitatif, memberikan koordinat objek dan informasi numerik tentang lokasi serta jenis penyakit yang terdeteksi. Pendekatan kuantitatif ini memungkinkan pengukuran yang obyektif dan pengelolaan data yang sistematis, memberikan landasan yang kokoh untuk analisis dan interpretasi lebih lanjut terkait kondisi tanaman padi.
 
 Dataset yang terkait dengan proyek web deteksi penyakit pada tanaman padi dapat diunduh melalui tautan berikut: [Dataset](https://drive.google.com/drive/folders/1M0XWq3mudbN-ylXKwBTfYT4fltiJBOMA)
+
+[Live Preview](https://alpa.space)
+
+Still in development
